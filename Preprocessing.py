@@ -5,6 +5,11 @@ import time
 from datetime import datetime
 import requests
 import json
+import os
+import cv2
+import glob
+
+##################################################################
 
 send_url = "http://api.ipstack.com/check?access_key=ae5620e07d25c95d8baca860f7fdc0d6"
 geo_req = requests.get(send_url)
@@ -23,8 +28,8 @@ if longitude is None:
 ##test city
 if city is None:
     print ('no city')
-
 ##########################################
+
 def current_time():
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print (current_time())
@@ -32,28 +37,27 @@ print (current_time())
 ## test
 if current_time() is None:
     print('no datetime')
-#########################################
+##########################################
+i = 0
+im_dir = r"C:\Users\susu1\Documents\Image processing\images"
 
-im = Image.open(r"C:\Users\susu1\Documents\Image processing\hurricane.png")
+data_path = os.path.join(im_dir,'*g')
+files = glob.glob(data_path)
+data = []
+for f1 in files:
+    im = Image.open(f1)
  # opening image
-
-if im is None:
-    print ('no pic')
-
-print (im)
-
+    if im is None:
+        print ('no pic')
+    print (im)
+    i = i + 1
 #im = im.crop((0,0,1024,1024))
 # crop image, coordinate system L= bottom left corner, uL = upper left, R = upper Right...
-
-im = im.resize((910, 512))
-# size is w x h, resizing filter - if none, PIL.Image.NEAREST, box- not needed
-
-im = im.filter(ImageFilter.EDGE_ENHANCE)
+    im = im.resize((910, 512))
+# size is w x h, resizing filter - 455 x 256?
+    im = im.filter(ImageFilter.EDGE_ENHANCE)
 #runs image thru filter, edge enhance/ edge enhance more/ find edges
-
-#im = ImageOps.grayscale("hurricane.png")
-## greyscale the image
-
-print (im)
-
-im.save("cropped_hurricane.png")
+    print (im)
+    print (i)
+    im.save("cropped dog  " + str(i) + ".jpg")
+    continue
