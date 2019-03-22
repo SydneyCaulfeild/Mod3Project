@@ -1,5 +1,6 @@
 from PIL import Image
 from PIL import ImageFilter
+from PIL import ImageOps
 import pathlib
 import time
 from datetime import datetime
@@ -57,6 +58,8 @@ for f1 in files:
 # size is w x h, resizing filter - 455 x 256?
     im = im.filter(ImageFilter.EDGE_ENHANCE)
 #runs image thru filter, edge enhance/ edge enhance more/ find edges
+    im = ImageOps.autocontrast(im, cutoff=0, ignore=None)
+#normalize !!! CHANGE PERCENTAGE IF YOU KNOW WHATS GOING ON !!
     print (im)
     print (i)
     im.save("cropped dog  " + str(i) + ".jpg")
