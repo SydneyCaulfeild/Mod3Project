@@ -51,9 +51,9 @@ for f1 in files:
         print ('no pic')
     print (im)
     i = i + 1
-#im = im.crop((0,0,1024,1024))
+    im = im.crop((0,0,100,100))
 # crop image, coordinate system L= bottom left corner, uL = upper left, R = upper Right...
-    im = im.resize((910, 512))
+    #im = im.resize((910, 512))
 # size is w x h, resizing filter - 455 x 256?
     im = im.filter(ImageFilter.EDGE_ENHANCE)
 #runs image thru filter, edge enhance/ edge enhance more/ find edges
